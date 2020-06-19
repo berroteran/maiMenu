@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Producto{% endblock %}
+
+{% block body %}
+    <h1>Producto</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ producto.id }}</td>
+            </tr>
+            <tr>
+                <th>Idcategoria</th>
+                <td>{{ producto.idcategoria }}</td>
+            </tr>
+            <tr>
+                <th>FechaAlta</th>
+                <td>{{ producto.fechaAlta ? producto.fechaAlta|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaModificacion</th>
+                <td>{{ producto.fechaModificacion ? producto.fechaModificacion|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UsuarioAlta</th>
+                <td>{{ producto.usuarioAlta }}</td>
+            </tr>
+            <tr>
+                <th>UsuarioBaja</th>
+                <td>{{ producto.usuarioBaja }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ producto.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ producto.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ producto.Description }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
+                <td>{{ producto.precio }}</td>
+            </tr>
+            <tr>
+                <th>Promocion</th>
+                <td>{{ producto.promocion ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('producto_index') }}">back to list</a>
+
+    <a href="{{ path('producto_edit', {'id': producto.id}) }}">edit</a>
+
+    {{ include('producto/_delete_form.html.twig') }}
+{% endblock %}

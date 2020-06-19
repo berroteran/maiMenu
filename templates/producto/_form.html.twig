@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 ml-md-auto">
+            <div class="card bg-light mb-3 mt-5" style="width: 800px">
+                <div class="card-body">
+                    <div class="card-header mb-3">PRODUCTO</div>
+                    {{ form_start(form) }}
+
+                    <div class="form_group">
+                        <div class="col-md-12 mb-3">
+                            {# type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"##}
+                            {{ form_row(form.idcategoria, {'attr': {'class': 'btn btn-secondary dropdown-toggle"'}}) }}
+                        </div>
+                    </div>
+
+                    {{ form_rest(form) }}
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user">Guardar</i>
+                            </button>
+
+                            <a class="btn btn-secondary" href="{{ path('producto_index') }}" role="button">Cancelar</a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

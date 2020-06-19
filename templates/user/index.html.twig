@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usarios{% endblock %}
+
+{% block body %}
+    <h1>Usuarios</h1>
+<div class="container-fluid" style="width: 95%;">
+    <div class="row">
+
+        <div class="table-responsive" id="mydatatable-container">
+
+            <div class="table-responsive" id="mydatatable-container">
+
+                <table class="records_list table table-striped table-bordered table-hover w-100" id="mydatatable">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Idrol</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.idrol }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <a class="btn btn-primary" href="{{ path('user_new') }}" role="button">Crear Usuario</a>
+{% endblock %}

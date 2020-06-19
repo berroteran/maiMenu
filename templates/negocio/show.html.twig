@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Negocio{% endblock %}
+
+{% block body %}
+    <h1>Negocio</h1>
+
+<div class="container">
+    <div class="row">
+
+        <div class="table-responsive" id="mydatatable-container">
+
+            <table class="records_list table table-striped table-bordered table-hover w-100" id="mydatatable">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ negocio.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ negocio.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Ubicacion</th>
+                <td>{{ negocio.ubicacion }}</td>
+            </tr>
+            <tr>
+                <th>GoogleMap</th>
+                <td>{{ negocio.googleMap }}</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                <td>{{ negocio.correo }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ negocio.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Estatus</th>
+                <td>{{ negocio.estatus ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>{{ negocio.logo }}</td>
+            </tr>
+            <tr>
+                <th>Foto</th>
+                <td>{{ negocio.foto }}</td>
+            </tr>
+        </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+    <a href="{{ path('negocio_index') }}">back to list</a>
+
+    <a href="{{ path('negocio_edit', {'id': negocio.id}) }}">edit</a>
+
+    {{ include('negocio/_delete_form.html.twig') }}
+{% endblock %}

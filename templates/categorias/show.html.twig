@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorias{% endblock %}
+
+{% block body %}
+    <h1>Categorias</h1>
+
+<div class="container">
+    <div class="row">
+
+    <div class="table-responsive" id="mydatatable-container">
+
+    <table class="records_list table table-striped table-bordered table-hover w-100" id="mydatatable">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categoria.id }}</td>
+            </tr>
+            <tr>
+                <th>FechaAlta</th>
+                <td>{{ categoria.fechaAlta ? categoria.fechaAlta|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>FechaModificacion</th>
+                <td>{{ categoria.fechaModificacion ? categoria.fechaModificacion|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UsuarioAlta</th>
+                <td>{{ categoria.usuarioAlta }}</td>
+            </tr>
+            <tr>
+                <th>UsuarioBaja</th>
+                <td>{{ categoria.usuarioBaja }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{{ categoria.activo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ categoria.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ categoria.descripcion }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+
+    </div>
+</div>
+
+
+    <a class="btn-secondary" href="{{ path('categorias_index') }}">back to list</a>
+
+    <a class="btn-warning" href="{{ path('categorias_edit', {'id': categoria.id}) }}">Editar</a>
+
+    {{ include('categorias/_delete_form.html.twig') }}
+{% endblock %}

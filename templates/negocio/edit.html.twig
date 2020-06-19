@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editando Negocio{% endblock %}
+
+{% block body %}
+    <h1>Editar Negocio</h1>
+
+    {{ include('negocio/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    {{ include('negocio/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogo de Negocios{% endblock %}
+
+{% block body %}
+
+
+    <h1>Catalogo de Negocios</h1>
+
+    <div class="container-fluid" style="width: 95%;">
+        <div class="row">
+
+            <div class="table-responsive" id="mydatatable-container">
+
+                <div class="table-responsive" id="mydatatable-container">
+
+                    <table class="records_list table table-striped table-bordered table-hover w-100" id="mydatatable">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Ubicacion</th>
+                            <th>GoogleMap</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Estatus</th>
+                            <th>Logo</th>
+                            <th>Foto</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for negocio in negocios %}
+                            <tr>
+                                <td>{{ negocio.id }}</td>
+                                <td>{{ negocio.nombre }}</td>
+                                <td>{{ negocio.ubicacion }}</td>
+                                <td>{{ negocio.googleMap }}</td>
+                                <td>{{ negocio.correo }}</td>
+                                <td>{{ negocio.telefono }}</td>
+                                <td>{{ negocio.estatus ? 'Yes' : 'No' }}</td>
+                                <td>{{ negocio.logo }}</td>
+                                <td>{{ negocio.foto }}</td>
+                                <td>
+                                    <a href="{{ path('negocio_show', {'id': negocio.id}) }}">show</a>
+                                    <a href="{{ path('negocio_edit', {'id': negocio.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <a href="{{ path('negocio_new') }}" role="button">Crear nuevo</a>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
