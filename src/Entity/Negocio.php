@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\NegocioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -76,6 +78,16 @@ class Negocio
      * @ORM\Column(type="string", length=33, nullable=true)
      */
     private $website;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Categorias::class, mappedBy="empresa", orphanRemoval=true)
+     */
+    private $categorias;
+
+    public function __construct()
+    {
+        $this->categorias = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -225,6 +237,37 @@ class Negocio
     public function setWebsite(?string $website): self
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorias[]
+     */
+    public function getCategorias(): Collection
+    {
+        return $this->categorias;
+    }
+
+    public function addCategoria(Categorias $categoria): self
+    {
+        if (!$this->categorias->contains($categoria)) {
+            $this->categorias[] = $categoria;
+            $categoria->setEmpresa($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategoria(Categorias $categoria): self
+    {
+        if ($this->categorias->contains($categoria)) {
+            $this->categorias->removeElement($categoria);
+            // set the owning side to null (unless already changed)
+            if ($categoria->getEmpresa() === $this) {
+                $categoria->setEmpresa(null);
+            }
+        }
 
         return $this;
     }

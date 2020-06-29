@@ -6,6 +6,10 @@ use App\Repository\CategoriasRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=CategoriasRepository::class)
@@ -58,6 +62,18 @@ class Categorias
      * @ORM\OneToMany(targetEntity=Producto::class, mappedBy="categoria")
      */
     private $productos;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Negocio::class, inversedBy="categorias")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $empresa;
 
     public function __construct()
     {
@@ -180,6 +196,30 @@ class Categorias
                 $producto->setCategoria(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage( ):?string
+    {
+        return $this->image;
+    }
+
+    public function setImage($fileImage): self
+    {
+        $this->image = $fileImage;
+
+        return $this;
+    }
+
+    public function getEmpresa(): ?Negocio
+    {
+        return $this->empresa;
+    }
+
+    public function setEmpresa(?Negocio $empresa): self
+    {
+        $this->empresa = $empresa;
 
         return $this;
     }

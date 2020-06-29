@@ -5,10 +5,13 @@ namespace App\Controller;
 use App\Entity\Categorias;
 use App\Form\CategoriasType;
 use App\Repository\CategoriasRepository;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @Route("/categorias")
@@ -28,7 +31,7 @@ class CategoriasController extends AbstractController
     /**
      * @Route("/new", name="categorias_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $categoria = new Categorias();
         //$categoria->setFechaAlta(date_create(date('Y-m-d H:i:s')));
@@ -37,6 +40,14 @@ class CategoriasController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $categoria->setImage($imageFileName);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($categoria);
             $entityManager->flush();
@@ -63,12 +74,22 @@ class CategoriasController extends AbstractController
     /**
      * @Route("/{id}/edit", name="categorias_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Categorias $categoria): Response
+    public function edit(Request $request, Categorias $categoria, FileUploader $fileUploader ): Response
     {
         $form = $this->createForm(CategoriasType::class, $categoria);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile) {
+                //$imageFileName = $fileUploader->upload($imageFile);
+                $imageFileName = $fileUploader->upload($imageFile, 1, 'cat');
+                $categoria->setImage($imageFileName);
+                $this->getDoctrine()->getManager()->persist($categoria);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('categorias_index');
@@ -85,7 +106,7 @@ class CategoriasController extends AbstractController
      */
     public function delete(Request $request, Categorias $categoria): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categoria->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $categoria->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($categoria);
             $entityManager->flush();
