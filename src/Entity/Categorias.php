@@ -73,7 +73,7 @@ class Categorias
      * @ORM\ManyToOne(targetEntity=Negocio::class, inversedBy="categorias")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $empresa;
+    private $negocio;
 
     public function __construct()
     {
@@ -102,9 +102,9 @@ class Categorias
         return $this->fechaModificacion;
     }
 
-    public function setFechaModificacion(?\DateTimeInterface $fechaModificacion): self
+    public function setFechaModificacion(): self
     {
-        $this->fechaModificacion = $fechaModificacion;
+        $this->fechaModificacion =  new \DateTime("now");
 
         return $this;
     }
@@ -116,6 +116,9 @@ class Categorias
 
     public function setUsuarioAlta(?int $usuarioAlta): self
     {
+        if ( empty($usuarioAlta) )
+            $usuarioAlta = $this->security->getUser();
+
         $this->usuarioAlta = $usuarioAlta;
 
         return $this;
@@ -202,9 +205,16 @@ class Categorias
 
     public function getImage( ):?string
     {
-        return $this->image;
+        $imagePath = '';
+        if ( $this->image )
+            $imagePath = $this->negocio->getId() . '/' . $this->getTipoImage() . '/' . $this->image;
+
+         return $imagePath;
     }
 
+    public function getTipoImage(){
+        return ('cat');
+    }
     public function setImage($fileImage): self
     {
         $this->image = $fileImage;
@@ -212,14 +222,14 @@ class Categorias
         return $this;
     }
 
-    public function getEmpresa(): ?Negocio
+    public function getNegocio(): ?Negocio
     {
-        return $this->empresa;
+        return $this->negocio;
     }
 
-    public function setEmpresa(?Negocio $empresa): self
+    public function setNegocio(?Negocio $negocio): self
     {
-        $this->empresa = $empresa;
+        $this->negocio = $negocio;
 
         return $this;
     }

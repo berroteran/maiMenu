@@ -19,9 +19,20 @@ class FileUploader
         //$this->slugger = $file;
     }
 
-    public function uploadByEmpresa(UploadedFile $file, Integer $idEempresa, string $cat)
+    public function uploadByNegocio(UploadedFile $file, Integer $idEempresa, string $cat)
     {
-        return $this->upload($file);
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        //$safeFilename = $this->slugger->slug($originalFilename);
+        $safeFilename = $originalFilename;
+        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+        try {
+            $file->move($this->getTargetDirectory(). '/'  . $idEempresa . '/' . $cat, $fileName);
+        } catch (FileException $e) {
+            // ... handle exception if something happens during file upload
+        }
+
+        return $fileName;
     }
 
     public function upload(UploadedFile $file)

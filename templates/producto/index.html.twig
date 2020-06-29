@@ -3,7 +3,7 @@
 {% block title %}Productos{% endblock %}
 
 {% block body %}
-    <h3>Productos des <select style="width: 450px;">
+    <h3>Productos de <select style="width: 450px;">
             {% for negocio in negocios %}
                 <option value="{{ negocio.id }}">{{ negocio.nombre }}</option>
             {% endfor %}

@@ -3,7 +3,15 @@
 {% block title %}Categorias{% endblock %}
 
 {% block body %}
-    <h1>Categorias</h1>
+
+    <h3>Productos de <select style="width: 450px;">
+            {% for negocio in negocios %}
+                <option value="{{ negocio.id }}">{{ negocio.nombre }}</option>
+            {% endfor %}
+        </select></h3>
+
+
+
     <div class="container-fluid" style="width: 95%;">
         <div class="row">
             <div class="table-responsive" id="mydatatable-container">

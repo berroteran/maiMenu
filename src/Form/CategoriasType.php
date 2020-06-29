@@ -24,11 +24,11 @@ class CategoriasType extends AbstractType
             ->add('activo', CheckboxType::class, ['label' => 'Activa?'] )
             //->add('fechaAlta' , DateType::class, ['required' => false, 'empty_data' => '','attr'=> [ 'readonly' => true ]])
             //->add('fechaModificacion', DateType::class, ['attr'=> [ 'readonly' => true ]])
-            ->add('image', TextType::class, ['required' => false] )
+            ->add('image', TextType::class, ['label' => 'Imagen de Categoria', 'required' => false, 'attr'=> [ 'readonly' => true ] ] )
 
 
             ->add('imageFile', FileType::class, [
-                'label' => 'Imagen (Archivo de Imagen)',
+                'label' => 'Imagen',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,

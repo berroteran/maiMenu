@@ -253,7 +253,7 @@ class Negocio
     {
         if (!$this->categorias->contains($categoria)) {
             $this->categorias[] = $categoria;
-            $categoria->setEmpresa($this);
+            $categoria->setNegocio($this);
         }
 
         return $this;
@@ -264,8 +264,8 @@ class Negocio
         if ($this->categorias->contains($categoria)) {
             $this->categorias->removeElement($categoria);
             // set the owning side to null (unless already changed)
-            if ($categoria->getEmpresa() === $this) {
-                $categoria->setEmpresa(null);
+            if ($categoria->getNegocio() === $this) {
+                $categoria->setNegocio(null);
             }
         }
 

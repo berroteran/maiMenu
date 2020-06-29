@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categorias;
 use App\Form\CategoriasType;
 use App\Repository\CategoriasRepository;
+use App\Repository\NegocioRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +24,12 @@ class CategoriasController extends AbstractController
      */
     public function index(CategoriasRepository $categoriasRepository): Response
     {
+        //to recuperar todas los neGoCios
+        $negociosCtl = new NegocioRepository( $this->getDoctrine()  );
+
         return $this->render('categorias/index.html.twig', [
             'categorias' => $categoriasRepository->findAll(),
+            'negocios' => $negociosCtl->findAll(),
         ]);
     }
 
@@ -78,6 +83,9 @@ class CategoriasController extends AbstractController
     {
         $form = $this->createForm(CategoriasType::class, $categoria);
         $form->handleRequest($request);
+        //update auditooria
+        //$categoria->set$this->security->getUser();
+        $categoria->setFechaModificacion();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -85,7 +93,7 @@ class CategoriasController extends AbstractController
             $imageFile = $form->get('imageFile')->getData();
             if ($imageFile) {
                 //$imageFileName = $fileUploader->upload($imageFile);
-                $imageFileName = $fileUploader->upload($imageFile, 1, 'cat');
+                $imageFileName = $fileUploader->uploadByNegocio( $imageFile, $categoria->getNegocio()->getId(), $categoria->getTipoImage());
                 $categoria->setImage($imageFileName);
                 $this->getDoctrine()->getManager()->persist($categoria);
             }
