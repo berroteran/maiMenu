@@ -1,27 +1,35 @@
 <div class="container">
-        <div class="">
-            <div class="card bg-light mb-3 mt-5" >
-                <div class="card-body">
-                    <div class="card-header mb-3">Negocio</div>
-        {{ form_start(form) }}
-    <!-- {ll{ form_widget(form) }} -->
-                    <div class="form_group">
-                        <div class="col-md-12 mb-3">
-                            {{ form_row(form.nombre, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+    <div class="">
+        <div class="card bg-light mb-3 mt-5">
+            <div class="card-body">
+                <div class="card-header mb-3">Negocio</div>
+                {{ form_start(form) }}
+                <!-- {ll{ form_widget(form) }} -->
+                <div class="form_group">
+                    <div class="col-md-12 mb-3">
+                        {{ form_row(form.nombre, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="form_group">
-                        <div class="col-md-12 mb-3">
+                </div>
+
+                <div class="row mb-3">
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.website, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.emenuurl, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                </div>
+
+                <div class="row ">
+                        <div class="col-md-6 mb-3">
                             {{ form_row(form.ubicacion, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                    </div>
-                    <div class="form_group">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             {{ form_row(form.googleMap, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                    </div>
+                </div>
 
-                <div class="row md-12 mb-3">
+                <div class="row mb-3">
                     <div class="form_group">
                         <div class="col-md-12 mb-3">
                             {{ form_row(form.correo, {'attr': {'class': 'form-control'}}) }}
@@ -34,12 +42,8 @@
                         </div>
                     </div>
                 </div>
-                    <div class="form_group">
-                        <div class="col-md-12 mb-3">
-                            {{ form_row(form.estatus, {'attr': {'class': 'form-check-input'}}) }}
-                        </div>
-                    </div>
-                    <!--
+
+                <!--
                     <div class="form_group">
                         <div class="col-md-12 mb-3">
                             {{ form_row(form.logo, {'attr': {'class': 'form-control'}}) }}
@@ -54,50 +58,41 @@
                     s-->
 
                 <div class="row mb-3">
-                    <div class="form_group">
-                        <div class="col-md-10 mb-3">
+                        <div class="col-md-3 mb-3">
                             {{ form_row(form.facebook, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                    </div>
-                    <div class="form_group">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-3 mb-3">
                             {{ form_row(form.instagram, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                    </div>
-                        <div class="form_group">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md- mb-3">
                             {{ form_row(form.twitter, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                    </div>
-
-                        <div class="form_group">
-                        <div class="col-md-12 mb-3">
-                            {{ form_row(form.website, {'attr': {'class': 'form-control'}}) }}
+                        <div class="col-md-2 mb-3">
+                            {{ form_row(form.estatus, {'attr': {'class': 'form-check-input'}}) }}
                         </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-btn fa-user"></i>Guardar
+                        </button>
+
+                        <a class="btn btn-secondary" href="{{ path('negocio_index') }}" role="button">Cancelar</a>
                     </div>
                 </div>
 
-                    <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
+                {{ form_rest(form) }}
 
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-user"></i>Guardar
-                            </button>
-
-                            <a class="btn btn-secondary" href="{{ path('negocio_index') }}" role="button">Cancelar</a>
-                        </div>
-                    </div>
-
-                    {{ form_rest(form) }}
-
-                    <div class="my-custom-class-for-errors">
-                        {{ form_errors(form) }}
-                    </div>
-        {{ form_end(form) }}
+                <div class="my-custom-class-for-errors">
+                    {{ form_errors(form) }}
                 </div>
+                {{ form_end(form) }}
             </div>
         </div>
+    </div>
 
-     <!--fin </div> -->
+    <!--fin </div> -->
 
 </div>

@@ -4,69 +4,85 @@
 
 {% block body %}
 
-    <h3>Productos de <select style="width: 450px;">
-            {% for negocio in negocios %}
-                <option value="{{ negocio.id }}">{{ negocio.nombre }}</option>
-            {% endfor %}
-        </select></h3>
+    <form >
+
+        <h3>Categorias de <select name="cboNegocio" id="cboNegocio" style="width: 450px;">
+                {% for negocio in negocios %}
+                    <option value="{{ negocio.id }}">{{ negocio.nombre }}</option>
+                {% endfor %}
+            </select></h3>
 
 
-
-    <div class="container-fluid" style="width: 95%;">
-        <div class="row">
-            <div class="table-responsive" id="mydatatable-container">
+        <div class="container-fluid" style="width: 95%;">
+            <div class="row">
                 <div class="table-responsive" id="mydatatable-container">
-                    <table class="records_list table table-striped table-bordered table-hover w-100" id="mydatatable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Activo</th>
+                    <div class="table-responsive" id="mydatatable-container">
+                        <table class="records_list table table-striped table-bordered table-hover w-100"
+                               id="mydatatable">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Activo</th>
 
-                <th>FechaAlta</th>
-                <th>FechaModificacion</th>
-                <th>UsuarioAlta</th>
-                <th>UsuarioBaja</th>
+                                <th>FechaAlta</th>
+                                <th>FechaModificacion</th>
+                                <th>UsuarioAlta</th>
+                                <th>UsuarioBaja</th>
 
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categoria in categorias %}
-            <tr>
-                <td>{{ categoria.id }}</td>
-                <td>{{ categoria.nombre }}</td>
-                <td>{{ categoria.descripcion }}</td>
-                <td>{{ categoria.activo ? 'Yes' : 'No' }}</td>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for categoria in categorias %}
+                                <tr>
+                                    <td>{{ categoria.id }}</td>
+                                    <td>{{ categoria.nombre }}</td>
+                                    <td>{{ categoria.descripcion }}</td>
+                                    <td>{{ categoria.activo ? 'Yes' : 'No' }}</td>
 
-                <td>{{ categoria.fechaAlta ? categoria.fechaAlta|date('Y-m-d') : '' }}</td>
-                <td>{{ categoria.fechaModificacion ? categoria.fechaModificacion|date('Y-m-d') : '' }}</td>
-                <td>{{ categoria.usuarioAlta }}</td>
-                <td>{{ categoria.usuarioBaja }}</td>
+                                    <td>{{ categoria.fechaAlta ? categoria.fechaAlta|date('Y-m-d') : '' }}</td>
+                                    <td>{{ categoria.fechaModificacion ? categoria.fechaModificacion|date('Y-m-d') : '' }}</td>
+                                    <td>{{ categoria.usuarioAlta }}</td>
+                                    <td>{{ categoria.usuarioBaja }}</td>
 
-                <td>
-                    <a href="{{ path('categorias_show', {'id': categoria.id}) }}">show</a>
-                    <a href="{{ path('categorias_edit', {'id': categoria.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Aun no hay registros</td>
-            </tr>
-        {% endfor %}
+                                    <td>
+                                        <a href="{{ path('categorias_show', {'id': categoria.id}) }}"
+                                           class="btn btn-secondary" role="button">show</a>
+                                        <a href="{{ path('categorias_edit', {'id': categoria.id}) }}" class="btn"
+                                           role="button">edit</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="9">Aun no hay registros</td>
+                                </tr>
+                            {% endfor %}
 
-        <tfoot>
-            <div class="form-group">
-                <a class="btn btn-primary" href="{{ path('categorias_new') }}" role="button">Crear categoria</a>
+                            <tfoot>
+                            <div class="form-group">
+                                {%  if  empresa  is defined   %}
+                                    <a class="btn btn-primary" href="{{ path('categorias_newXn', { 'id' : empresa } ) }}" onclick=""
+                                        role="button">Crear categoria</a>
+                                    {% else %}
+                                        <a class="btn btn-primary" href="{{ path('categorias_new' ) }}" onclick=""
+                                           role="button">Crear categoria</a>
+                                {% endif %}
+                            </div>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
             </div>
-        </tfoot>
-    </table>
-</div>
 
         </div>
-    </div>
 
-</div>
+    </form>
+
+    <script language="JavaScript">
+
+    </script>
 
 {% endblock %}

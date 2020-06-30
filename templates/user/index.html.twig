@@ -16,22 +16,27 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Idrol</th>
-                <th>actions</th>
+                <td>Estado</td>
+                <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.telefono }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.idrol }}</td>
+                <td></td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" role="button">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" role="button">edit</a>
                 </td>
             </tr>
         {% else %}

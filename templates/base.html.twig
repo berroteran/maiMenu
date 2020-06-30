@@ -13,28 +13,25 @@
 
 </head>
 <body>
-<nav
-        class="navbar navbar-expand-lg navbar-light bg-light"
-        style="height: 70px;"
->
-    <a class="navbar-brand" href="#">Menu-Chan 2.....</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
-    <ul class="nav navbar-nav navbar-right">
-        {% if app.user %}
-            <li><a class="nav-link" href="{{ path('list') }}">Lista</a></li>
-            <li><a class="nav-link" href="{{ path('negocio_index') }}">Negocios</a></li>
-            <li><a class="nav-link" href="{{ path('producto_index') }}">Productos</a></li>
-            <li><a class="nav-link" href="{{ path('categorias_index') }}">Categorias</a></li>
-            <li><a class="nav-link" href="{{ path('user_index') }}">Usuarios</a></li>
-            <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
-        {% else %}
-            <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
-            <li>
-                <a class="nav-link" href="{{ path('registration') }}">Register</a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"  style="height: 70px;" >
+
+        <a class="navbar-brand " href="#"><i>e</i>Menu Administrador ::</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+        <ul class="nav navbar-nav navbar-right">
+            {% if app.user %}
+                <li><a class="nav-link" href="{{ path('negocio_index') }}">Negocios</a></li>
+                <li><a class="nav-link" href="{{ path('producto_index') }}">Productos</a></li>
+                <li><a class="nav-link" href="{{ path('categorias_index') }}">Categorias</a></li>
+                <li><a class="nav-link" href="{{ path('user_index') }}">Usuarios</a></li>
+                <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+            {% else %}
+                <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
+                <li>
+                    <a class="nav-link" href="{{ path('registration') }}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% block body %}{% endblock %} {% block javascripts %}{% endblock %}
 </body>
 </html>

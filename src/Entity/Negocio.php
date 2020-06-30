@@ -84,8 +84,15 @@ class Negocio
      */
     private $categorias;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $emenuurl;
+
+    public function __construct($id = null)
     {
+        if (!empty($id))
+            $this->id = $id;
         $this->categorias = new ArrayCollection();
     }
 
@@ -268,6 +275,18 @@ class Negocio
                 $categoria->setNegocio(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmenuurl(): ?string
+    {
+        return $this->emenuurl;
+    }
+
+    public function setEmenuurl(?string $emenuurl): self
+    {
+        $this->emenuurl = $emenuurl;
 
         return $this;
     }

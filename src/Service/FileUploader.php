@@ -19,7 +19,7 @@ class FileUploader
         //$this->slugger = $file;
     }
 
-    public function uploadByNegocio(UploadedFile $file, Integer $idEempresa, string $cat)
+    public function uploadByNegocio(UploadedFile $file, string $idEempresa, string $cat)
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         //$safeFilename = $this->slugger->slug($originalFilename);

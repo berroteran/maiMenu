@@ -19,16 +19,19 @@ class NegocioType extends AbstractType
             ->add('nombre')
             ->add('ubicacion')
             ->add('googleMap')
+            ->add('website', UrlType::class, ['required' => false])
             ->add('correo', EmailType::class)
+            ->add('emenuurl', null, ['required' => false])
+
             ->add('telefono')
-            ->add('estatus', CheckboxType::class, ['label' => 'Activo?'])
+            ->add('estatus', CheckboxType::class, ['label' => '¿ Activo? '])
             ->add('logo')
             ->add('foto')
-            ->add('facebook', UrlType::class,['required' => false])
-            ->add('twitter', UrlType::class,['required' => false])
-            ->add('instagram', UrlType::class,['required' => false])
-            ->add('website', UrlType::class,['required' => false])
-        ;
+            ->add('facebook', UrlType::class, ['required' => false])
+            ->add('twitter', UrlType::class, ['required' => false])
+            ->add('instagram', UrlType::class, ['required' => false])
+            ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
