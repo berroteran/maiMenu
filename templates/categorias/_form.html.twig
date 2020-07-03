@@ -4,9 +4,17 @@
             <div class="card bg-light mb-3 mt-5" style="width: 800px">
                 <div class="card-body">
                     {%  if  empresa  is defined   %}
-                        <div class="card-header mb-3">Categorias para {{ empresa }} </div>
+                        {% if categoria.nombre is defined %}
+                            <div class="card-header mb-3">Editando categorias para {{ empresa }} </div>
+                        {% else %}
+                            <div class="card-header mb-3">Nueva categorias para {{ empresa }} </div>
+                        {% endif %}
                     {% else %}
-                        <div class="card-header mb-3">Categorias (Sin Cliente) </div>
+                        {% if categoria.nombre is defined %}
+                            <div class="card-header mb-3">Editando categorias (Sin Cliente) </div>
+                        {% else %}
+                            <div class="card-header mb-3">Nueva Categorias (Sin Cliente) </div>
+                        {% endif %}
                     {% endif %}
                     {{ form_start(form) }}
                         <div class="form_group">
@@ -19,22 +27,11 @@
                                 {{ form_row(form.descripcion, {'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
-                        <div class="form_group">
-                            <div class="col-md-12 mb-3">
-                                {{  form_row(form.activo, {'attr': {'class': 'form-check-input'}}) }}
-                            </div>
-                        </div>
 
                     <div class="form_group">
                         <div class="col-md-12 mb-3">
-                            {{ form_row(form.image, {
-                                attr: {
-                                    'class': 'fomr-image',
-                                    'placeholder': 'Select an article image'
-                                }
-                            }) }}
-                            <img src="{{ asset( '/uploads/images/' ~ form.vars.data.image )  }}" height="100">
 
+                            <img src="{{ asset( '/uploads/images/' ~ form.vars.data.image )  }}" height="100">
                         </div>
                     </div>
 
@@ -47,7 +44,8 @@
                                 </button>
 
                                 <a class="btn btn-secondary" href="{{ path('categorias_index') }}" role="button">Cancelar</a>
-
+                                |
+                                <a class="btn btn-secondary" href="{{ path('categorias_index') }}" role="button">Inactivar</a>
 
                             </div>
                         </div>

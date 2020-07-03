@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoriasController extends AbstractController
 {
     /**
+     * Listar todas las categorias
      * @Route("/", name="categorias_index", methods={"GET", "POST"})
      */
     public function index(CategoriasRepository $categoriasRepository): Response
@@ -34,6 +35,7 @@ class CategoriasController extends AbstractController
     }
 
     /**
+     * listar categorias por negocio
      * @Route("/{id}/negocio", name="categorias_negocio", methods={ "GET", "POST"})
      */
     public function catByNegocio(CategoriasRepository $categoriasRepository, $id): Response
@@ -55,8 +57,10 @@ class CategoriasController extends AbstractController
     public function new(Request $request, FileUploader $fileUploader): Response
     {
         $categoria = new Categorias();
-        //$categoria->setFechaAlta(date_create(date('Y-m-d H:i:s')));
+        $categoria->setFechaAlta();
+        $categoria->setActivo(true);
         //$categoria->setFechaModificacion(date_create(date('Y-m-d H:i:s')));
+
         $form = $this->createForm(CategoriasType::class, $categoria);
         $form->handleRequest($request);
 

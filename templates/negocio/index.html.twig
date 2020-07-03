@@ -5,9 +5,6 @@
 {% block body %}
 
 
-    <h4>Nuestros Clientes</h4>
-
-
     <div class="form-group">
         <a class="btn btn-primary" href="{{ path('negocio_new')  }}" role="button">Registrar Nuevo Cliente</a>
     </div>
@@ -46,9 +43,9 @@
                         <td>{{ negocio.estatus ? 'Yes' : 'No' }}</td>
 
                         <td><a class="btn btn-info" href="{{ path('negocio_show',{'id': negocio.id} ) }}" role="button">ver</a></td>
-                        <td><a class="btn btn-primary" href="{{ path('negocio_index')  }}" role="button">Editar Menu</a></td>
+                        <td><a class="btn btn-primary" href="{{ path('producto_index', {'id': negocio.id} )  }}" role="button">Editar Menu</a></td>
                         <td><a class="btn btn-secondary" href="{{ path('categorias_negocio', {'id': negocio.id} ) }}" role="button">Categorias</a></td>
-                        <td><a class="btn btn-warning" href="{{ path('negocio_edit', {'id': negocio.id}) }}" role="button">Empresa</a></td>
+                        <td><a class="btn btn-warning" href="{{ path('negocio_edit', {'id': negocio.id}) }}" role="button">Negocio</a></td>
                     </tr>
                 {% else %}
                     <tr>

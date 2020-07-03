@@ -90,9 +90,9 @@ class Categorias
         return $this->fechaAlta;
     }
 
-    public function setFechaAlta(\DateTimeInterface $fechaAlta): self
+    public function setFechaAlta( ): self
     {
-        $this->fechaAlta = $fechaAlta;
+        $this->fechaAlta = new \DateTime("now");;
 
         return $this;
     }
@@ -206,7 +206,9 @@ class Categorias
     public function getImage( ):?string
     {
         $imagePath = '';
-        if ( $this->image )
+        if ( empty( $this->image)  )
+            $imagePath = 'no-image.jpg';
+        else
             $imagePath = $this->negocio->getId() . '/' . $this->getTipoImage() . '/' . $this->image;
 
          return $imagePath;

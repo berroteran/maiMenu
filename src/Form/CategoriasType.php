@@ -4,9 +4,12 @@ namespace App\Form;
 
 use App\Entity\Categorias;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Button;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,18 +24,17 @@ class CategoriasType extends AbstractType
         $builder
             ->add('nombre')
             ->add('descripcion', TextareaType::class)
-            ->add('activo', CheckboxType::class, ['label' => 'Activa?'] )
+            ->add('activo', HiddenType::class, ['label' => 'Activa?'] )
             //->add('fechaAlta' , DateType::class, ['required' => false, 'empty_data' => '','attr'=> [ 'readonly' => true ]])
             //->add('fechaModificacion', DateType::class, ['attr'=> [ 'readonly' => true ]])
-            ->add('image', TextType::class, ['label' => 'Imagen de Categoria', 'required' => false, 'attr'=> [ 'readonly' => true ] ] )
+            ->add('image', HiddenType::class, ['label' => 'Imagen de Categoria', 'required' => false, 'attr'=> [ 'readonly' => true ] ] )
 
 
             ->add('imageFile', FileType::class, [
-                'label' => 'Imagen',
+                'label' => 'Cargar Imagen',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-
                 // make it optional so you don't have to re-upload the PDF file
                 // every time you edit the Product details
                 'required' => false,

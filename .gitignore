@@ -136,3 +136,7 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+/menu_chan2.zip
+/composer (copy).json
+/.idea/
+/public/uploads/images/1/cat/

@@ -13,6 +13,30 @@
                         </div>
                     </div>
 
+                    <div class="form_group">
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.nombre, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.Description, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.precio, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form_group">
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.promocion, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
                     {{ form_rest(form) }}
 
                     <div class="form-group">
@@ -22,7 +46,8 @@
                             </button>
 
                             <a class="btn btn-secondary" href="{{ path('producto_index') }}" role="button">Cancelar</a>
-
+                            |
+                            <a class="btn btn-secondary" href="{{ path('producto_index') }}" role="button">Inactivar</a>
                         </div>
                     </div>
 
