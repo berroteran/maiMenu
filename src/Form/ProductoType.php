@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,7 +35,34 @@ class ProductoType extends AbstractType
                 ])
             ->add('precio', NumberType::class)
             ->add('promocion',CheckboxType::class, ['label' => 'En Promocion?', 'required' => false, 'empty_data' => false ] )
-            ->add('activo',CheckboxType::class, ['label' => 'Activo?', 'required' => false, 'empty_data' => false ])
+            ->add('activo',HiddenType::class, ['label' => 'Activo?', 'required' => false, 'empty_data' => false ])
+
+            ->add('imagen', HiddenType::class, ['label' => 'Imagen de Categoria', 'required' => false, 'attr'=> [ 'readonly' => true ] ] )
+
+
+            ->add('imageFile', FileType::class, [
+                'label' => 'Cargar Imagen',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                /*'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/jpg','application/x-jpg',
+                            'application/png','application/x-png',
+                        ],
+                        'mimeTypesMessage' => 'por favor cargar una imagen valida.',
+                    ])
+                ],
+                */
+            ])
         ;
     }
 

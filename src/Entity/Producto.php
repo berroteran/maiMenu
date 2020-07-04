@@ -77,11 +77,17 @@ class Producto
      */
     private $promocion;
 
+    /**
+     * @ORM\Column(type="string", length=200, nullable=true)
+     */
+    private $imagen;
+
 
     function __construct()
     {
         $this->fechaAlta = new \DateTime();
         $this->fechaModificacion = new \DateTime();
+        $this->setActivo(true);
     }
 
 
@@ -217,6 +223,18 @@ class Producto
     public function setCategoria(?Categorias $categoria): self
     {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): self
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }

@@ -1,70 +1,127 @@
-{# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block
-    title %}Log in!{% endblock %} {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 ml-md-auto">
-                <div class="">
-                    <div class="card bg-light mb-3 mt-5" style="width: 800px;">
-                        <div class="card-body">
-                            <form class="form-horizontal" role="form" method="post">
-                                {% if error %}
-                                    <div class="alert alert-danger">
-                                        {{ error.messageKey|trans(error.messageData, 'security') }}
-                                    </div>
-                                {% endif %} {% if app.user %}
-                                    <div class="mb-3">
-                                        You are logged in as {{ app.user.username }},
-                                        <a href="{{ path('app_logout') }}">Logout</a>
-                                    </div>
-                                {% endif %}
-                                <div class="card-header mb-3">Iniciar session</div>
-                                <div class="form-group">
-                                    <label for="email" class="col-md-4 control-label"
-                                    >E-Mail Address</label
-                                    >
-                                    <div class="col-md-12">
-                                        <input
-                                                id="inputEmail"
-                                                type="email"
-                                                class="form-control"
-                                                name="email"
-                                                value="{{ last_username }}"
-                                                required
-                                                autofocus
-                                        />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-4 control-label"
-                                    >Password</label
-                                    >
-                                    <div class="col-md-12">
-                                        <input
-                                                id="inputPassword"
-                                                type="password"
-                                                class="form-control"
-                                                name="password"
-                                                required
-                                        />
-                                    </div>
-                                </div>
-                                <input
-                                        type="hidden"
-                                        name="_csrf_token"
-                                        value="{{ csrf_token('authenticate') }}"
-                                />
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-btn fa-sign-in"></i> Login
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://z9t4u9f6.stackpathcdn.com/wp-content/themes/mdbootstrap4/css/compiled-4.19.1.min.css?ver=4.19.1" />
+
+{% endblock %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="container justify-content-center">
+        <div class="row col-md-12 justify-content-center">
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+
+            <!-- Material form login -->
+    <div class="card">
+
+        {% if app.user %}
+            <div class="mb-3">
+                Tu haz iniciado sesion como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <h5 class="card-header info-color white-text text-center py-4">
+            <strong>Iniciar session</strong>
+        </h5>
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+
+            <!-- Form -->
+            <form class="text-center form-horizontal" style="color: #757575;" role="form" method="post">
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="control-label">e-Correo</label>
+                    <input
+                            id="inputEmail"
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="{{ last_username }}"
+                            required
+                            autofocus
+                    />
+                </div>
+
+                <!-- Password -->
+                <div class="md-form">
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input
+                                id="inputPassword"
+                                type="password"
+                                class="form-control"
+                                name="password"
+                                required
+                        />
+
+                    </div>
+
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                            <label class="form-check-label" for="materialLoginFormRemember">Recuerdame</label>
                         </div>
                     </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <a href="">¿Olvidó la clave?</a>
+                    </div>
                 </div>
-            </div>
+
+                    <input
+                            type="hidden"
+                            name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}"
+                    />
+
+                <!-- Sign in button -->
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Inicia sesion</button>
+
+                <!-- Register -->
+                <p>¿No eres miembro?
+                    <a href="">Registrar</a>
+                </p>
+
+                <!-- Social login -->
+                <p>o inicia session:</p>
+                <a type="button" class="btn-floating btn-fb btn-sm">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a type="button" class="btn-floating btn-tw btn-sm">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a type="button" class="btn-floating btn-li btn-sm">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a type="button" class="btn-floating btn-git btn-sm">
+                    <i class="fab fa-github"></i>
+                </a>
+
+            </form>
+            <!-- Form -->
+
+        </div>
+
+    </div>
+    <!-- Material form login -->
         </div>
     </div>
+
+
 {% endblock %}
