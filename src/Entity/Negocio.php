@@ -89,6 +89,11 @@ class Negocio
      */
     private $emenuurl;
 
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $tipoUsuario;
+
     public function __construct($id = null)
     {
         if (!empty($id))
@@ -178,7 +183,14 @@ class Negocio
 
     public function getLogo()
     {
-        return $this->logo;
+        $imagePath = '';
+        if ( empty( $this->logo)  )
+            $imagePath = 'no-image.jpg';
+        else
+            $imagePath = $this->negocio->getId() . '/' . $this->getTipoImage() . '/' . $this->logo;
+
+        return $imagePath;
+
     }
 
     public function setLogo($logo): self
@@ -287,6 +299,22 @@ class Negocio
     public function setEmenuurl(?string $emenuurl): self
     {
         $this->emenuurl = $emenuurl;
+
+        return $this;
+    }
+
+    public function getTipoImage(){
+        return ('logo');
+    }
+
+    public function getTipoUsuario(): ?int
+    {
+        return $this->tipoUsuario;
+    }
+
+    public function setTipoUsuario(?int $tipoUsuario): self
+    {
+        $this->tipoUsuario = $tipoUsuario;
 
         return $this;
     }

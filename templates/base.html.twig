@@ -44,10 +44,11 @@
                             Configuracion <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a  href="{{ path('registration') }}" >Registrar</a></li>
+                            <li><a href="{{ path('registration') }}" >Registrar</a></li>
                             <li role="separator  " class="divider"></li>
                             <li><a  href="{{ path('user_index') }}">Usuarios</a></li>
                             <li role="separator" class="divider"></li>
+                            <li><a> {{ app.user.name }} :: Perfil</a></li>
                         </ul>
                     </li>
                     <!-- logout -->

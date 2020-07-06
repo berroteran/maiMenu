@@ -4,82 +4,126 @@
 
 {% block body %}
 
-    <form >
 
         <h3>Categorias de <select name="cboNegocio" id="cboNegocio" style="width: 450px;">
                 {% for negocio in negocios %}
                     <option value="{{ negocio.id }}">{{ negocio.nombre }}</option>
                 {% endfor %}
-            </select></h3>
-
+            </select>
+        </h3>
 
         <div class="container-fluid" style="width: 95%;">
-            <div class="row">
-                <div class="table-responsive" id="mydatatable-container">
-                    <div class="table-responsive" id="mydatatable-container">
-                        <table class="records_list table table-striped table-bordered table-hover w-100"
-                               id="mydatatable">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Activo</th>
-
-                                <th>FechaAlta</th>
-                                <th>FechaModificacion</th>
-                                <th>UsuarioAlta</th>
-                                <th>UsuarioBaja</th>
-
-                                <th>actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for categoria in categorias %}
-                                <tr>
-                                    <td>{{ categoria.id }}</td>
-                                    <td>{{ categoria.nombre }}</td>
-                                    <td>{{ categoria.descripcion }}</td>
-                                    <td>{{ categoria.activo ? 'Yes' : 'No' }}</td>
-
-                                    <td>{{ categoria.fechaAlta ? categoria.fechaAlta|date('Y-m-d') : '' }}</td>
-                                    <td>{{ categoria.fechaModificacion ? categoria.fechaModificacion|date('Y-m-d') : '' }}</td>
-                                    <td>{{ categoria.usuarioAlta }}</td>
-                                    <td>{{ categoria.usuarioBaja }}</td>
-
-                                    <td>
-                                        <a href="{{ path('categorias_show', {'id': categoria.id}) }}"
-                                           class="btn btn-secondary" role="button">show</a>
-                                        <a href="{{ path('categorias_edit', {'id': categoria.id}) }}" class="btn"
-                                           role="button">edit</a>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="9">Aun no hay registros</td>
-                                </tr>
-                            {% endfor %}
-
-                            <tfoot>
-                            <div class="form-group">
-                                {%  if  empresa  is defined   %}
-                                    <a class="btn btn-primary" href="{{ path('categorias_newXn', { 'id' : empresa } ) }}" onclick=""
-                                        role="button">Crear categoria</a>
-                                    {% else %}
-                                        <a class="btn btn-primary" href="{{ path('categorias_new' ) }}" onclick=""
-                                           role="button">Crear categoria</a>
-                                {% endif %}
-                            </div>
-                            </tfoot>
-                        </table>
-                    </div>
-
-                </div>
+            <div class="form-group">
+                {%  if  empresa  is defined   %}
+                    <a class="btn btn-primary" href="{{ path('categorias_newXn', { 'id' : empresa } ) }}" onclick=""
+                       role="button">Crear categoria</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('categorias_new' ) }}" onclick=""
+                       role="button">Crear categoria</a>
+                {% endif %}
             </div>
 
+            <div class="col ml-md-auto">
+                <div class="card bgl-light mb-3 mt-1">
+                    <div class="card-body">
+                        <div class="card-header mb-3">Nueva Categorias (Sin Cliente) </div>
+
+                        <div class="row">
+                        <div class="col-md-6 ml-md-auto">
+                                <div class="table-responsive" id="mydatatable-container">
+
+                                    <table class="records_list table table-striped table-bordered table-hover w-100"  id="mydatatable">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th style="width: 300px;">Categoria</th>
+                                            <th style="width: 360px;">Descripcion</th>
+                                            <th>Activa</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for categoria in categorias %}
+                                            <tr>
+                                                <td>{{ categoria.id }} / {{ categoria.nombre }}</td>
+                                                <td>{{ categoria.descripcion }}</td>
+                                                <td>{{ categoria.activo ? 'Yes' : 'No' }}</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="9">Aun no hay registros</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                        </div>
+
+                        <!-- form-->
+                        <div class="col-md-6 ml-md-auto">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-header mb-3">Editando categorias (Sin Cliente) </div>
+                                    <!-- Formulario -->
+                                    <form name="categorias" method="post" enctype="multipart/form-data">
+
+                                        <div class="form-group row">
+                                            <label for="categorias_nombre" class="col-sm-2 col-form-label required">Nombre</label>
+                                            <div class="col-md-10">
+                                                <input type="text" id="categorias_nombre" name="categorias[nombre]" required="required" maxlength="30" class="form-control" placeholder="Nombre de Categoria" value="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form_group row">
+                                            <label for="categorias_descripcion" class="col-sm-2 col-form-label required">Descripcion</label>
+                                            <div class="col-md-10">
+                                                <textarea id="categorias_descripcion" name="categorias[descripcion]" required="required" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form_group sm-3 ">
+                                            <div class="col-md-10">
+                                                <img src="/uploads/images/1/cat/quesadillas2-5efa86b9865c5.png" height="100">
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" id="categorias_activo" name="categorias[activo]" value="1">
+                                        <input type="hidden" id="categorias_image" name="categorias[image]" readonly="readonly" value="1/cat/quesadillas2-5efa86b9865c5.png">
+                                        <div>
+                                            <label for="categorias_imageFile">Cargar Imagen</label>
+                                            <input type="file" id="categorias_imageFile" name="categorias[imageFile]">
+                                        </div>
+                                        <input type="hidden" id="categorias__token" name="categorias[_token]" value="vpQ1aSLcYk4pLgVRZF5i4Phlj2ln-WTnDGR1OsQVt-c">
+
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fa fa-btn fa-user">Guardar</i>
+                                                </button>
+
+                                                <a class="btn btn-secondary" href="/categorias/" role="button">Cancelar</a>
+                                                |
+                                                <a class="btn btn-secondary" href="/categorias/" role="button">Inactivar</a>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="my-custom-class-for-errors">
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </form>
 
     <script language="JavaScript">
 

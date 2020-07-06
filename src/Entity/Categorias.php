@@ -217,6 +217,7 @@ class Categorias
     public function getTipoImage(){
         return ('cat');
     }
+
     public function setImage($fileImage): self
     {
         $this->image = $fileImage;
